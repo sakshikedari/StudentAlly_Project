@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100..900&family=Montserrat:wght@100..900&display=swap');
+
+  body {
+    @apply bg-gray-50;
+    font-family: "Lato", sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .navbar {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors;
+  }
+
+  .input-field {
+    @apply w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+}

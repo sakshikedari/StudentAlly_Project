@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import logo from "/src/components/studentally.png";
-import userIcon from "/src/assets/usericon.png"; 
+import userIcon from "/src/assets/usericon.png";
 import axios from "axios";
 import "./Navbar.css";
 
@@ -29,7 +29,6 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     setUser(storedUser);
@@ -37,7 +36,7 @@ function Navbar() {
     const fetchUserRole = async () => {
       try {
         const res = await axios.get("http://localhost:5000/user-role", { withCredentials: true });
-        console.log("Fetched User Role:", res.data.role); // Debugging
+        console.log("Fetched User Role:", res.data.role);
         setUserRole(res.data.role);
       } catch (error) {
         console.error("Error fetching user role", error);
@@ -61,16 +60,12 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
-  
     const handleUserUpdate = () => {
       const updatedUser = JSON.parse(localStorage.getItem("user"));
       setUser(updatedUser);
     };
-  
+
     window.addEventListener("userUpdated", handleUserUpdate);
-  
     return () => {
       window.removeEventListener("userUpdated", handleUserUpdate);
     };
@@ -80,7 +75,7 @@ function Navbar() {
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     setUser(null);
-    setUserRole(null); 
+    setUserRole(null);
     navigate("/alumni-login");
   };
 
@@ -99,7 +94,7 @@ function Navbar() {
   const isAdminPanel = location.pathname.startsWith("/admin");
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${shrink ? "shrink" : ""}`}>
       <div className="navbar-container">
         <div className="navbar-flex">
           <div className="navbar-logo">
@@ -116,13 +111,14 @@ function Navbar() {
             ))}
 
             {(userRole === "admin" || isAdminPanel) && (
-              <>
-                <Link to="/admin" className="text-gray-700 hover:text-primary-600">Admin Panel</Link>
-              </>
+              <Link to="/admin" className="text-gray-700 hover:text-primary-600">Admin Panel</Link>
             )}
-
-            {userRole === "hod" && <Link to="/hod/dashboard" className="text-gray-700 hover:text-primary-600">HOD Dashboard</Link>}
-            {userRole === "teacher" && <Link to="/teacher/students" className="text-gray-700 hover:text-primary-600">Students</Link>}
+            {userRole === "hod" && (
+              <Link to="/hod/dashboard" className="text-gray-700 hover:text-primary-600">HOD Dashboard</Link>
+            )}
+            {userRole === "teacher" && (
+              <Link to="/teacher/students" className="text-gray-700 hover:text-primary-600">Students</Link>
+            )}
 
             {user ? (
               <div className="user-menu" ref={profileRef}>
@@ -149,28 +145,30 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu - Only visible on small screens */}
       {isOpen && (
-        <div className="mobile-menu md:hidden">
+        <div className="mobile-menu block md:hidden">
           {navLinks.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className="block px-3 py-2"
-              onClick={() => setIsOpen(false)}
-            >
+            <Link key={to} to={to} className="block px-3 py-2" onClick={() => setIsOpen(false)}>
               {label}
             </Link>
           ))}
 
           {(userRole === "admin" || isAdminPanel) && (
-            <>
-              <Link to="/admin" className="block px-3 py-2">Admin Panel</Link>
-
-            </>
+            <Link to="/admin" className="block px-3 py-2" onClick={() => setIsOpen(false)}>
+              Admin Panel
+            </Link>
           )}
-
-          {userRole === "Admin" && <Link to="/hod/dashboard" className="block px-3 py-2">HOD Dashboard</Link>}
-          {userRole === "moderator" && <Link to="/teacher/students" className="block px-3 py-2">Students</Link>}
+          {userRole === "hod" && (
+            <Link to="/hod/dashboard" className="block px-3 py-2" onClick={() => setIsOpen(false)}>
+              HOD Dashboard
+            </Link>
+          )}
+          {userRole === "teacher" && (
+            <Link to="/teacher/students" className="block px-3 py-2" onClick={() => setIsOpen(false)}>
+              Students
+            </Link>
+          )}
 
           {user ? (
             <div className="mobile-user-menu">

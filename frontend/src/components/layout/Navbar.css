@@ -1,28 +1,16 @@
 .navbar {
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 0px 20px;
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 100%;
-  z-index: 1000;
-  transition: all 0.3s ease-in-out;
-}
-
-.navbar {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-}
-
-.navbar:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 0.75rem 1.5rem;
 }
 
 .navbar.shrink {
-  padding: 8px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1.25rem;
+  transition: all 0.3s ease;
 }
-
 
 .navbar-container {
   max-width: 1280px;
@@ -31,120 +19,80 @@
 
 .navbar-flex {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 64px;
+  justify-content: space-between;
 }
 
 .navbar-logo img {
-  height: 50px;
-  width: auto;
-  display: block;
+  height: 40px;
 }
 
 .navbar-links {
   display: flex;
-  gap: 25px;
   align-items: center;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .navbar-links a {
-  color: #161617;
   text-decoration: none;
-  font-weight: 500;
+  color: #000000;
 }
 
 .navbar-links a:hover {
-  color: #3b82f6;
+  color: #0284c7;
 }
 
 .navbar-button {
-  background-color: #3b82f6;
+  background-color: #0284c7;
   color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  text-align: center;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .navbar-button:hover {
-  background-color: #2563eb;
-}
-
-.mobile-menu {
-  display: block;
-  padding: 16px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 64px;
-  right: 0;
-  width: 100%;
-}
-
-.mobile-menu a {
-  display: block;
-  padding: 10px 16px;
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.mobile-menu a:hover {
-  color: #3b82f6;
-}
-
-.mobile-menu-btn {
-  color: #4b5563;
-  cursor: pointer;
+  background-color: #0369a1;
 }
 
 .user-menu {
   position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  margin-left: 1rem;
 }
 
 .user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #3b82f6;
-  color: #1c1a1a;
+  height: 36px;
+  width: 36px;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: 2px solid black;
 }
 
 .dropdown {
   position: absolute;
-  top: 50px;
+  top: 2.5rem;
   right: 0;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  width: 180px;
-  text-align: left;
-  display: none; 
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  display: none;
 }
 
 .dropdown.active {
   display: block;
 }
 
-.dropdown p {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #333;
-}
-
 .logout-btn {
   background-color: #ef4444;
   color: white;
-  padding: 6px 12px;
-  border-radius: 5px;
   border: none;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  margin-top: 0.5rem;
   width: 100%;
-  text-align: center;
   cursor: pointer;
 }
 
@@ -152,16 +100,83 @@
   background-color: #dc2626;
 }
 
+.navbar-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+}
+
+/* Mobile menu full width layout */
+.mobile-menu {
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+/* Each nav link in mobile menu */
+.mobile-menu a {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  color: #1f2937; /* black */
+  text-decoration: none;
+}
+
+.mobile-menu a:hover {
+  background-color: #f3f4f6; /* subtle hover */
+  color: #0284c7; /* optional accent */
+}
+
+/* Mobile user menu styles */
 .mobile-user-menu {
-  padding: 16px;
-  text-align: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
 }
 
 .mobile-user-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #3b82f6;
-  display: block;
-  margin: 0 auto 10px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
 }
+
+.logout-btn {
+  background-color: #0284c7;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #0369a1;
+}
+
+
+@media (min-width: 768px) {
+  .navbar-menu-btn {
+    display: none; 
+  }
+}
+
+.navbar-links {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+}
+

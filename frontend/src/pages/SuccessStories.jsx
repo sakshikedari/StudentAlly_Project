@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../src/pages/SuccessStories.css";
+import "./successStories.css";
 
 function SuccessStories() {
   const [stories, setStories] = useState([]);

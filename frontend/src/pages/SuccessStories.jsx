@@ -24,7 +24,7 @@ function SuccessStories() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     setUser(storedUser);
 
-    fetch("http://localhost:5000/success-stories")
+    fetch("http://localhost:5000/success")
       .then((res) => res.json())
       .then((data) => setStories(data))
       .catch((err) => console.error("Error fetching stories:", err));
@@ -56,7 +56,7 @@ function SuccessStories() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5000/success-stories", {
+      const response = await fetch("http://localhost:5000/success", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -67,6 +67,7 @@ function SuccessStories() {
         }),
       });
 
+      
       if (!response.ok) {
         throw new Error("Failed to submit story");
       }

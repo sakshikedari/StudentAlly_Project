@@ -40,7 +40,7 @@ function Home() {
               <img src={successImage} alt="Alumni" className="card-img" />
               <h3>John Doe</h3>
               <p>CEO, Tech Innovations Inc.</p>
-              <Link to="/success-stories" className="card-link">Read More →</Link>
+              <Link to="/success" className="card-link">Read More →</Link>
             </div>
           </div>
         </div>

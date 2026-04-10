@@ -42,42 +42,42 @@ const AdminPanel = () => {
     
 
   const addAdmin = async (e) => {
-    e.preventDefault();
-  
-    if (!token) {
-      alert("Unauthorized: Please log in first");
-      return;
+  e.preventDefault();
+
+  if (!token) {
+    alert("Unauthorized: Please log in first");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:5000/admin/register", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ name, email, password, role }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || data.message || "Failed to add admin");
     }
-  
-    try {
-      const res = await fetch("http://localhost:5000/admin/register", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ name, email, password, role }),
-      });
-  
-      const data = await res.json();
-      console.log("user data",data);
-  
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to add admin");
-      }
-  
-      alert("Admin added successfully!");
-      setName("");
-      setEmail("");
-      setPassword("");
-      setRole("moderator");
-  
-      fetchAdmins();
-    } catch (error) {
-      console.error("Error Adding Admin:", error.message);
-      alert("Error: " + error.message);
-    }
-  };
+
+    alert("Admin added successfully!");
+    setName("");
+    setEmail("");
+    setPassword("");
+    setRole("moderator");
+
+    fetchAdmins();
+  } catch (error) {
+    console.error("Error Adding Admin:", error);
+    alert("Error: " + error.message);
+  }
+};
+
   
 
   const deleteAdmin = async (id) => {
